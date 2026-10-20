@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grafiare — Produtos</title>
+  <meta name="description" content="Catálogo completo de produtos da Grafiare." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/logo.png" alt="Grafiare" />
+      </a>
+      <nav class="nav">
+        <a href="index.html">Inicial</a>
+        <a href="empresa.html">Empresa</a>
+        <a href="catalogo-cores.html">Catálogo de cores</a>
+        <a href="produtos.html" class="active">Produtos</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+      <button class="cart-toggle" id="cartToggle" aria-label="Abrir orçamento">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero" style="padding: 40px 0;">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <span class="eyebrow">PRODUTOS</span>
+        <h1>Catálogo Completo</h1>
+        <p>Todos os produtos da Grafiare com código interno e preço. Use os filtros à esquerda ou pesquise pelo nome.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog" style="padding: 60px 0;">
+    <div class="container">
+      <div class="catalog-layout">
+        <!-- Filtros à esquerda -->
+        <aside class="filters-sidebar">
+          <div class="search-bar">
+            <input type="search" id="searchInput" placeholder="Pesquisar produto..." />
+          </div>
+          <div class="filters-title">Categorias</div>
+          <div class="filters" id="filters">
+            <button class="filter-btn active" data-cat="all">Todos</button>
+            <!-- categorias injetadas por JS -->
+          </div>
+        </aside>
+
+        <!-- Produtos à direita -->
+        <div class="products-main">
+          <div class="results-info" id="resultsInfo"></div>
+          <div class="product-grid" id="productGrid"></div>
+          <div class="empty-state" id="emptyState" hidden>Nenhum produto encontrado.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> GRAFIARE. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-head">
+      <h3>Seu Orçamento</h3>
+      <button class="modal-close" id="cartClose" aria-label="Fechar">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-foot">
+      <div class="cart-total">
+        <span>Itens:</span>
+        <strong id="cartCount">0</strong>
+      </div>
+      <button class="btn btn-primary btn-block" id="sendWhatsApp">Enviar orçamento pelo WhatsApp</button>
+      <button class="btn btn-ghost btn-block" id="clearCart">Limpar lista</button>
+    </div>
+  </aside>
+  <div class="cart-overlay" id="cartOverlay" hidden></div>
+
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

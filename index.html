@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grafiare — Catálogo e Orçamento</title>
+  <meta name="description" content="Catálogo de produtos da fábrica. Solicite seu orçamento pelo WhatsApp." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#top">
+        <img class="brand-logo" src="assets/logo.png" alt="Grafiare" />
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="active">Inicial</a>
+        <a href="empresa.html">Empresa</a>
+        <a href="catalogo-cores.html">Catálogo de cores</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+      <button class="cart-toggle" id="cartToggle" aria-label="Abrir orçamento">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="color-strip" style="padding: 16px 0 8px;">
+    <div class="carousel carousel-full" id="homeCarousel">
+      <div class="carousel-track" id="homeCarouselTrack"></div>
+      <button class="carousel-btn prev" id="homeCarouselPrev" aria-label="Anterior">&#10094;</button>
+      <button class="carousel-btn next" id="homeCarouselNext" aria-label="Próximo">&#10095;</button>
+    </div>
+    <div class="home-carousel-meta" style="text-align:center; padding: 8px 20px 0;">
+      <span id="homeCarouselCounter" style="color:var(--muted); font-size:13px;"></span>
+      <span style="margin:0 10px; color:var(--border);">|</span>
+      <a href="catalogo-cores.html" style="color:var(--accent-dark); font-weight:600; font-size:13px;">Ver catálogo completo de cores</a>
+    </div>
+  </section>
+
+  <section class="hero" id="top">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <span class="eyebrow">FÁBRICA · LOJA FÍSICA</span>
+        <h1>Soluções profissionais em impermeabilizantes, tintas e texturas.</h1>
+        <p>Monte seu orçamento online, escolha os produtos e envie direto para nosso WhatsApp de atendimento. Retire na loja ou combine entrega.</p>
+        <div class="hero-actions">
+          <a href="#catalogo" class="btn btn-primary">Ver Catálogo</a>
+          <a href="contato.html" class="btn btn-ghost">Falar conosco</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-title">Categorias</div>
+          <ul>
+            <li>Impermeabilizantes</li>
+            <li>Tintas</li>
+            <li>Texturas</li>
+            <li>Complementos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog" id="catalogo">
+    <div class="container">
+      <div class="section-head">
+        <h2>Catálogo de Produtos</h2>
+        <p>Selecione os itens, defina as quantidades e envie seu orçamento pelo WhatsApp.</p>
+      </div>
+
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-cat="all">Todos</button>
+        <!-- categories injected by JS -->
+      </div>
+
+      <div class="search-bar">
+        <input type="search" id="searchInput" placeholder="Buscar produto..." />
+      </div>
+
+      <div class="product-grid" id="productGrid"></div>
+      <div class="empty-state" id="emptyState" hidden>Nenhum produto encontrado.</div>
+    </div>
+  </section>
+
+  <section class="about" id="sobre">
+    <div class="container about-inner">
+      <div>
+        <h2>Somos a Grafiare</h2>
+        <p>Fábrica com loja física, especializada em impermeabilizantes, tintas, texturas e complementos para construção e reforma. Nossos produtos contam com boletim técnico e suporte especializado.</p>
+        <p>Monte seu orçamento aqui e fale com nossa equipe pelo WhatsApp. Saiba mais em <a href="empresa.html">Empresa</a>.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat"><strong>4</strong><span>Categorias</span></div>
+        <div class="stat"><strong>100%</strong><span>Qualidade</span></div>
+        <div class="stat"><strong>WhatsApp</strong><span>Atendimento rápido</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> GRAFIARE. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Product Modal -->
+  <div class="modal" id="productModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true">
+      <button class="modal-close" data-close aria-label="Fechar">&times;</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-head">
+      <h3>Seu Orçamento</h3>
+      <button class="modal-close" id="cartClose" aria-label="Fechar">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-foot">
+      <div class="cart-total">
+        <span>Itens:</span>
+        <strong id="cartCount">0</strong>
+      </div>
+      <button class="btn btn-primary btn-block" id="sendWhatsApp">Enviar orçamento pelo WhatsApp</button>
+      <button class="btn btn-ghost btn-block" id="clearCart">Limpar lista</button>
+    </div>
+  </aside>
+  <div class="cart-overlay" id="cartOverlay" hidden></div>
+
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const track = document.getElementById("homeCarouselTrack");
+      const prevBtn = document.getElementById("homeCarouselPrev");
+      const nextBtn = document.getElementById("homeCarouselNext");
+      const carousel = document.getElementById("homeCarousel");
+      const counter = document.getElementById("homeCarouselCounter");
+      if (!track) return;
+      const TOTAL = 34;
+      let index = 0, timer = null;
+      let visible = getVisible();
+
+      function getVisible() {
+        const w = window.innerWidth;
+        return Math.max(3, Math.min(7, Math.floor(w / 180)));
+      }
+
+      function slideWidthPct() { return 100 / visible; }
+      function maxIndex() { return Math.max(0, TOTAL - visible); }
+
+      for (let i = 1; i <= TOTAL; i++) {
+        const slide = document.createElement("div");
+        slide.className = "carousel-slide";
+        slide.style.flex = `0 0 ${slideWidthPct()}%`;
+        const img = document.createElement("img");
+        img.src = `assets/cores/${i}.png`;
+        img.alt = `Grafiare cor ${i}`;
+        img.loading = "eager";
+        slide.appendChild(img);
+        track.appendChild(slide);
+      }
+
+      function update() {
+        const w = slideWidthPct();
+        const clamped = Math.min(index, maxIndex());
+        index = clamped;
+        track.style.transform = `translateX(-${index * w}%)`;
+        const start = index + 1;
+        const end = Math.min(index + visible, TOTAL);
+        if (counter) counter.textContent = `${start}-${end} de ${TOTAL}`;
+      }
+      function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
+      function startAuto() { stopAuto(); timer = setInterval(() => { if (index >= maxIndex()) index = -1; goTo(index + 1); }, 1800); }
+      function goTo(n) {
+        let ni = n;
+        if (ni < 0) ni = maxIndex();
+        if (ni > maxIndex()) ni = 0;
+        index = ni;
+        update();
+      }
+
+      if (prevBtn) prevBtn.addEventListener("click", () => { stopAuto(); goTo(index - 1); startAuto(); });
+      if (nextBtn) nextBtn.addEventListener("click", () => { stopAuto(); goTo(index + 1); startAuto(); });
+      if (carousel) { carousel.addEventListener("mouseenter", stopAuto); carousel.addEventListener("mouseleave", startAuto); }
+
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          visible = getVisible();
+          Array.from(track.children).forEach(s => s.style.flex = `0 0 ${slideWidthPct()}%`);
+          if (index > maxIndex()) index = maxIndex();
+          update();
+        }, 150);
+      });
+
+      update();
+      startAuto();
+    });
+  </script>
+</body>
+</html>
